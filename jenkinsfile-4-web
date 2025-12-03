@@ -8,7 +8,7 @@ pipeline {
             steps {
                 sshagent (credentials: ['AWS-SSH-KEY']) {
                     sh """
-                        ssh -o StrictHostKeyChecking=no ec2-user@<IP_ADDRESS> '
+                        ssh -o StrictHostKeyChecking=no ec2-user@172.31.43.107 '
                             cd ~
                             rm -rf fruits-veg_market
                             https://github.com/ajanakueniola-commits/fruits-veg_market.git
