@@ -1,18 +1,24 @@
- pipeline  {
-    agent any 
-    
+pipeline {
+    agent any
+
     stages {
-        
-        stage (' Deploy Packages   SSH') {
-            
+
+        stage('Deploy Packages SSH') {
+
             steps {
                 sshagent (credentials: ['AWS-SSH-KEY']) {
                     sh """
-                        ssh -o StrictHostKeyChecking=no  ec2-user@172.31.43.107 ' cd ~; rm -rf fruits-veg_market ;git clone https://github.com/techbleat/fruits-veg_market.git; cd fruits-veg_market; cd web ;sudo cp web/index.html  /usr/share/nginx/html/ ' 
+                        ssh -o StrictHostKeyChecking=no ec2-user@<IP_ADDRESS> '
+                            cd ~
+                            rm -rf fruits-veg_market
+                            https://github.com/ajanakueniola-commits/fruits-veg_market.git
+                            cd fruits-veg_market/web
+                            sudo cp index.html /usr/share/nginx/html/
+                        '
                     """
                 }
-
             }
         }
     }
 }
+
