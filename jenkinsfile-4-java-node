@@ -1,0 +1,26 @@
+pipeline  {
+    agent any 
+    
+    stages {
+        
+        stage ('Install & deploy Packages   SSH') {
+            
+            steps {
+                sshagent (credentials: ['AWS-SSH-KEY']) {
+                    sh """
+                        ssh -o StrictHostKeyChecking=no  ec2-user@172.31.44.31 
+                        ' cd ~; rm -rf fruits-veg_market ;
+                          git clone https://github.com/ajanakueniola-commits/fruits-veg_market.git; 
+                          cd fruits-veg_market;  
+                          ls -ltr;
+                          cd java;
+                          mvn spring-boot:run -Dspring-boot.run.arguments="--server.address=0.0.0.0 --server.port=9090" &' 
+                    """
+                }
+
+            }
+        }
+    }
+}
+
+
