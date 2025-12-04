@@ -13,7 +13,8 @@ pipeline {
                             rm -rf fruits-veg_market;
                             https://github.com/ajanakueniola-commits/fruits-veg_market.git;
                             cd fruits-veg_market/web;
-                           sudo cp web/index.html  /usr/share/nginx/html/ '
+                           sudo cp fruits-veg_market/web/index.html /usr/share/nginx/html/; 
+                            sudo systemctl reload nginx '
                         '
                     """
                 }
