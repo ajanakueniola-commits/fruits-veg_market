@@ -9,12 +9,11 @@ pipeline {
                 sshagent (credentials: ['AWS-SSH-KEY']) {
                     sh """
                         ssh -o StrictHostKeyChecking=no ec2-user@172.31.43.107 
-                        ' sudo yum install openssh-clients -y;
-                          cd ~ ;
+                        ' cd ~ ;
                           rm -rf fruits-veg_market;
                           https://github.com/ajanakueniola-commits/fruits-veg_market.git;
                           cd fruits-veg_market/web;
-                          sudo cp fruits-veg_market/web/index.html /usr/share/nginx/html/ '
+                          sudo cp index.html   /usr/share/nginx/html/ '
                     """
                 }
             }
