@@ -2,31 +2,23 @@ pipeline  {
     agent any 
     
     stages {
-      stage ('Install Packages   SSH') {
-            
-            steps {
-                sshagent (credentials: ['AWS-SSH-KEY']) {
-                    sh """
-                        ssh -o StrictHostKeyChecking=no  ec2-user@172.31.37.202  
-                        ' python3 -m venv .venv; 
-                        source .venv/bin/activate;
-                        python --version;
-                       python -m pip install -r requirements.txt; '
-                    }
-                }
-        
         stage ('Deploy Packages   SSH') {
             
             steps {
                 sshagent (credentials: ['AWS-SSH-KEY']) {
                     sh """
+                         ssh -o StrictHostKeyChecking=no  ec2-user@172.31.37.202  
                         ' cd ~; 
                         rm -rf fruits-veg_market ;
                         git clone https://github.com/ajanakueniola-commits/fruits-veg_market.git; 
                         cd fruits-veg_market; 
                         ls -ltr;
                         cd python;
-                        ls -ltr '
+                        ls -ltr ;
+                        python3 -m venv .venv; 
+                        source .venv/bin/activate;
+                        python --version;
+                       python -m pip install -r requirements.txt; '           '
                        
                     """
                 }
